@@ -1,0 +1,10 @@
+.container {
+    margin-bottom: 24px;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
