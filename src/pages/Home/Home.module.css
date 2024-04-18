@@ -8,3 +8,19 @@
     gap: 12px;
     justify-content: center;
 }
+
+.bg-body {
+    background-color: red;
+}
+
+input {
+    color: blue
+}
+
+.title {
+    color: red;
+}
+
+.bigTitle {
+    font-size: 70px;
+}
