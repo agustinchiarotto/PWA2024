@@ -4,20 +4,6 @@ import { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import style from "./Home.module.css";
 
-const user = {
-  name: "Pepe",
-};
-
-const user2 = {
-  name: "Jose",
-};
-
-const user3 = {
-  name: "Charlie",
-};
-
-const users = [user, user2, user3];
-
 const Home = () => {
   const [likes, setLikes] = useState(0);
   const [mensaje, setMensaje] = useState("");
@@ -27,7 +13,7 @@ const Home = () => {
   };
 
   const [valueInput1, setValueInput1] = useState("");
-  const [userState, setUsersState] = useState(users);
+  const [userState, setUsersState] = useState([]);
 
   const onChangeHandler = (event) => {
     setValueInput1(event.target.value);
@@ -38,6 +24,13 @@ const Home = () => {
       name: valueInput1,
     };
     setUsersState([...userState, newUser]);
+  };
+
+  const fetchUsers = async () => {
+    console.log("Hola!");
+    const response = await fetch("/mocks/usuarios.json");
+    const result = await response.json();
+    setUsersState(result);
   };
 
   //Poder ejecutar una funcion cuando sucede algo.
@@ -55,18 +48,14 @@ const Home = () => {
   }, [likes]);
 
   useEffect(() => {
+    fetchUsers();
     const likesRecuperados = localStorage.getItem("likes");
     setLikes(likesRecuperados);
   }, []);
 
-  // const onClickDeleteHandler = (id) => {
-  //   //el delete del arreglo con ese id
-  // };
-
   return (
     <div className={style.container}>
       <img src={logo} className="App-logo" alt="logo" />
-      {/* <h1 className={classes(style.title, style.bigTitle)}>HOLA !!</h1> */}
       <p>Tenes {likes} Me gusta</p>
       <Button onClick={onClickLikeHandler} text="Like" />
       <Button text="Share" />
@@ -80,10 +69,7 @@ const Home = () => {
 
       <div className={style.flexColumn}>
         <Input value={valueInput1} onChangeHandler={onChangeHandler} />
-        {/* <input type="text" value={valueInput1} onChange={onChangeHandler} />; */}
         <Button text="Guardar" onClick={guardarUsuario} />
-
-        {/* <ListTaks tasks={tasks} onClickDelete={onClickDeleteHandler} /> */}
       </div>
     </div>
   );
