@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import style from "./Home.module.css";
 
+const Titulo = (text) => {
+  console.time("Tiempo que tarda en renderizar");
+
+  const mayusText = "hola".toUpperCase();
+  let temp = 0;
+  // temp = Math.sqrt(1000) + Math.pow(1000, 2);
+
+  for (let i = 0; i < 1000; i++) {
+    for (let j = 0; j < 1000; j++) {
+      for (let k = 0; k < 1000; k++) {
+        temp = Math.sqrt(k) + Math.pow(j, 2);
+      }
+    }
+  }
+
+  console.timeEnd("Tiempo que tarda en renderizar");
+
+  return (
+    <h1>
+      {mayusText} - {temp}
+    </h1>
+  );
+};
+
 const Home = () => {
   const [likes, setLikes] = useState(0);
   const [mensaje, setMensaje] = useState("");
@@ -55,6 +79,7 @@ const Home = () => {
 
   return (
     <div className={style.container}>
+      <Titulo text="hola" />
       <img src={logo} className="App-logo" alt="logo" />
       <p>Tenes {likes} Me gusta</p>
       <Button onClick={onClickLikeHandler} text="Like" />
