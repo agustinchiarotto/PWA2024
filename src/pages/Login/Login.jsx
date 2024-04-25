@@ -1,11 +1,5 @@
 const Login = () => {
-  return (
-    <div>
-      Login...
-      <Input value={valueInput1} onChangeHandler={onChangeHandler} />
-      <Input value={valueInput1} onChangeHandler={onChangeHandler} />
-    </div>
-  );
+  return <p className="text-red-700 font-bold text-3xl">Login...</p>;
 };
 
 export default Login;

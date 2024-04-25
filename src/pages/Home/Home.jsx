@@ -3,32 +3,29 @@ import Button from "../../components/Button/Button";
 import { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import style from "./Home.module.css";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../const/routes";
+
+// let temp = 0;
+
+// for (let i = 0; i < 1000; i++) {
+//   for (let j = 0; j < 1000; j++) {
+//     for (let k = 0; k < 1000; k++) {
+//       temp = Math.sqrt(k) + Math.pow(j, 2);
+//     }
+//   }
+// }
 
 const Titulo = (text) => {
   console.time("Tiempo que tarda en renderizar");
-
   const mayusText = "hola".toUpperCase();
-  let temp = 0;
-  // temp = Math.sqrt(1000) + Math.pow(1000, 2);
-
-  for (let i = 0; i < 1000; i++) {
-    for (let j = 0; j < 1000; j++) {
-      for (let k = 0; k < 1000; k++) {
-        temp = Math.sqrt(k) + Math.pow(j, 2);
-      }
-    }
-  }
-
   console.timeEnd("Tiempo que tarda en renderizar");
-
-  return (
-    <h1>
-      {mayusText} - {temp}
-    </h1>
-  );
+  return <h1>{mayusText}</h1>;
 };
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [likes, setLikes] = useState(0);
   const [mensaje, setMensaje] = useState("");
 
@@ -77,6 +74,10 @@ const Home = () => {
     setLikes(likesRecuperados);
   }, []);
 
+  const onClickLoginHandler = () => {
+    navigate(ROUTES.login);
+  };
+
   return (
     <div className={style.container}>
       <Titulo text="hola" />
@@ -96,6 +97,8 @@ const Home = () => {
         <Input value={valueInput1} onChangeHandler={onChangeHandler} />
         <Button text="Guardar" onClick={guardarUsuario} />
       </div>
+
+      <Button text="Login" onClick={onClickLoginHandler} />
     </div>
   );
 };
